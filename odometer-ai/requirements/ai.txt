@@ -1,0 +1,7 @@
+torch==2.10.0+cpu
+torchvision==0.25.0+cpu
+
+ultralytics==8.4.16
+ultralytics-thop==2.0.18
+
+opencv-python-headless==4.13.0.92

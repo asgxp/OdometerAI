@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['odometer']
+
+roboflow:
+  workspace: object-detect-y6xwx
+  project: odometer-crop
+  version: 1
+  license: MIT
+  url: https://universe.roboflow.com/object-detect-y6xwx/odometer-crop/dataset/1

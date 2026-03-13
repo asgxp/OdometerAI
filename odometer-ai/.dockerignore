@@ -1,0 +1,14 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.log
+
+runs
+datasets
+weights
+checkpoints
+
+.env
+venv
+.cache

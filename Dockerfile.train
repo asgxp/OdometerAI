@@ -1,0 +1,35 @@
+# docker rmi odometer-train 2>/dev/null || true && docker build -f Dockerfile.train -t odometer-train . รันคำสั่งนี้เพื่อ build โดยที่มันจะลบตัวเก่าที่ค้างไว้อยู่ก่อนเสมอ
+
+FROM nvidia/cuda:13.1.1-cudnn-runtime-ubuntu22.04
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    python3 python3-pip \
+    libgl1 libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+COPY odometer-training/ ./odometer-training/
+COPY odometer-ai/requirements/ ./requirements/
+
+RUN pip install --upgrade pip \
+    && pip install --extra-index-url https://download.pytorch.org/whl/cpu \
+    -r requirements/gpu.txt
+
+WORKDIR /app/odometer-training
+
+CMD ["python", "train.py"]
+
+# docker run --gpus all odometer-train python digit_detector/train.py เทรนตัวเลขด้วย gpu
+
+# docker run --gpus all odometer-train python odometer_detector/train.py เทรนกรอบด้วย gpu
+
+# docker run odometer-train python digit_detector/train.py เทรนตัวเลขด้วย vm cpu
+
+# docker run odometer-train python odometer_detector/train.py เทรนกรอบด้วย vm cpu
+
+
+
+
+
